@@ -1,0 +1,73 @@
+﻿<Window x:Class="PhoneBookApp.EditContactWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="Edit contact"
+        WindowStartupLocation=" CenterScreen"
+        ResizeMode="NoResize"
+        Height="315" 
+        Width="300">
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBox}" 
+               BasedOn="{StaticResource MaterialDesignOutlinedTextBox}">
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="Margin" Value="0,5,0,0"/>
+        </Style>
+        
+        <Style
+            TargetType="{x:Type TextBlock}"
+            BasedOn="{StaticResource MaterialDesignTextBlock}">
+            <Setter Property="FontSize" Value="9"/>
+            <Setter Property="Foreground" Value="Red"/>
+            <Setter Property="Visibility" Value="Hidden"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="70"/>
+        </Grid.RowDefinitions>
+        
+        <Border Grid.Row="0"
+                Background="#F7F7F7"
+                Padding="15">
+            <StackPanel>
+                <TextBox x:Name="NameEditInput" 
+                         materialDesign:HintAssist.Hint="Name"/>
+                <TextBlock x:Name="NameEditErrorText" 
+                           Text="Name cannot be empty"/>
+                
+                <TextBox x:Name="NumbeEditInput" 
+                         materialDesign:HintAssist.Hint="Number"/>
+                <TextBlock x:Name="NumberEditErrorText" 
+                           Text="Number cannot be empty"/>
+                
+                <TextBox x:Name="EmailEditInput" 
+                         materialDesign:HintAssist.Hint="E-mail"/>
+                <TextBlock x:Name="EmailEditErrorText" 
+                           Text="Invalid email address"/>
+            </StackPanel>
+        </Border>
+        
+        <Border Grid.Row="1"
+                Background="#f6f5f7"
+                BorderBrush="#C8C8C8"
+                BorderThickness="1,1,0,0"
+                Padding="15">
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <Button Content="Edit" 
+                        Style="{StaticResource AddButton}"
+                        Click="EditButton_Click"/>
+                <Button Content="Cancel" 
+                        Style="{StaticResource NormalButton}"
+                        IsCancel="True"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

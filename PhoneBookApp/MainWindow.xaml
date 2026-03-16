@@ -1,0 +1,188 @@
+﻿<Window x:Class="PhoneBookApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="PhoneBook"
+        Icon="Assets/Icons/phone-book.png"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Height="450" 
+        Width="800"
+        >
+    <Window.Resources>
+        <Style 
+            TargetType="{x:Type TextBox}" 
+            BasedOn="{StaticResource MaterialDesignOutlinedTextBox}">
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="FontSize" Value="11"/>
+
+        </Style>
+        <Style TargetType="{x:Type ListBox}"
+               BasedOn="{StaticResource MaterialDesignListBox}">
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="ItemContainerStyle">
+                <Setter.Value>
+                    <Style TargetType="ListBoxItem"
+                           BasedOn="{StaticResource MaterialDesignListBoxItem}">
+                        <Setter Property="Padding" Value="0"/>
+                        <Setter Property="Margin" Value="0"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="400"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Row="0" 
+                Grid.Column="0"
+                Background="#E3E1E6"
+                BorderBrush="#A8A5A5"
+                BorderThickness="0,0,0,1"
+                Padding="15">
+            <TextBox x:Name="SearchTextBox"
+                     VerticalAlignment="Center"
+                     TextChanged="TextChangedEventHandler">
+                <materialDesign:HintAssist.Hint>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Assets/Icons/magnifier.png"
+                               Width="11"
+                               Height="11"
+                               Margin="0,0,2,0"/>
+                        <TextBlock Text="Search"/>
+                    </StackPanel>
+                </materialDesign:HintAssist.Hint>
+            </TextBox>
+        </Border>
+        
+        <Border Grid.Row="0"
+                Grid.Column="1"
+                Background="#E3E1E6"
+                BorderBrush="#A8A5A5"
+                BorderThickness="0,0,0,1"
+                Padding="15">
+            <StackPanel Orientation="Horizontal" 
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center">
+                <Button x:Name="AadContactBtt"
+                        Style="{StaticResource AddButton}"
+                        Background="#4B9568"
+                        BorderBrush="#4B9568"
+                        Click="AddContactButton_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Assets/icons/plus.png"
+                               Width="16"
+                               Height="16"
+                               Margin="0,0,5,0"/>
+                        <TextBlock Text="Add"/>
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="EditContactBtt" 
+                        Style="{StaticResource AddButton}"
+                        Click="EditContactButton_Click" 
+                        IsEnabled="{Binding ElementName=ContactsListBox, Path=SelectedItems.Count}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Assets/Icons/pen.png"
+                               Width="16"
+                               Height="16"
+                               Margin="0,0,5,0">
+                        </Image>
+                        <TextBlock Text="Edit"/>
+                    </StackPanel>
+                </Button>
+                
+                <Button x:Name="DeleteContactBtt" 
+                        Style="{StaticResource AddButton}"
+                        Background="#C24140"
+                        BorderBrush="#C24140"
+                        Click="DeleteContactButton_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Assets/Icons/close.png"
+                               Width="16"
+                               Height="16"
+                               Margin="0,0,5,0">
+                        </Image>
+                        <TextBlock Text="Delete"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Border>
+        
+        <Border Grid.Row="1" 
+                Grid.Column="0"
+                Background="#F7F7F7"
+                BorderBrush="#A8A5A5"
+                BorderThickness="0,0,1,1">
+            <ListBox x:Name="ContactsListBox">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="#A8A5A5"
+                                BorderThickness="0,0,0,1"
+                                Padding="8,5">
+                            <TextBlock Text="{Binding Name}"/>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+        
+        <Border Grid.Row="1" 
+                Grid.Column="1"
+                Background="#F7F7F7">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <Border Grid.Row="0"
+                        Background="#F7F7F7"
+                        BorderBrush="#A8A5A5"
+                        BorderThickness="0,0,0,1">
+                    <TextBlock Padding="8"
+                               FontSize="20"
+                               Text="Contact details"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                </Border>
+                
+                <Border Grid.Row="1">
+                    <StackPanel>
+                        <TextBlock Padding="8"
+                                   FontSize="15">
+                            <Run Text="Name: "/>
+                            <Run Text="{Binding ElementName=ContactsListBox, Path=SelectedItem.Name}"/>
+                        </TextBlock>
+                        <TextBlock Padding="8"
+                                   FontSize="15">
+                            <Run Text="Number: "/>
+                            <Run Text="{Binding ElementName=ContactsListBox, Path=SelectedItem.Number}"/>
+                        </TextBlock>
+                        <TextBlock Padding="8"
+                                   FontSize="15">
+                            <Run Text="Email: "/>
+                            <Run Text="{Binding ElementName=ContactsListBox, Path=SelectedItem.Email}"/>
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

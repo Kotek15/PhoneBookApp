@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net10.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <UseWPF>true</UseWPF>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="MaterialDesignColors" Version="5.3.0" />
+      <PackageReference Include="MaterialDesignThemes" Version="5.3.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Data\contacts.json" />
+      <Content Include="Data\contacts.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Assets\Icons\plus.png" />
+      <Resource Include="Assets\Icons\plus.png" />
+      <None Remove="Assets\Icons\pen.png" />
+      <Resource Include="Assets\Icons\pen.png" />
+      <None Remove="Assets\Icons\magnifier.png" />
+      <Resource Include="Assets\Icons\magnifier.png" />
+      <None Remove="Assets\Icons\bin.png" />
+      <None Remove="Assets\Icons\trash_icon_white.png" />
+      <None Remove="Assets\Icons\trashcan.png" />
+      <None Remove="Assets\Icons\close.png" />
+      <Resource Include="Assets\Icons\close.png" />
+      <None Remove="Assets\Icons\phone-book.png" />
+      <Resource Include="Assets\Icons\phone-book.png" />
+    </ItemGroup>
+
+</Project>
